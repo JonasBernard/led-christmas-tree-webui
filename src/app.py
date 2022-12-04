@@ -29,3 +29,13 @@ def tree_color_post():
         color = "#ffffff"
     adapter.set_color(color)
     return { "message": "Set color to " + color }
+
+@app.post("/tree/brightness/")
+def tree_brightness_post():
+    try:
+        brightness = float(request.json['brightness'])
+    except KeyError or Exception as e:
+        brightness = 0.5
+    adapter.set_brightness(brightness)
+    return { "message": "Set brightness to " + brightness }
+

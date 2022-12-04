@@ -12,3 +12,6 @@ class DummyAdapter(Adapter):
 
     def set_color(self, color):
         print("Set color to " + color)
+
+    def set_brightness(self, brightness):
+        print("Set brightness to " + brightness)

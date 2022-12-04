@@ -1,6 +1,10 @@
 document.getElementById("colorPicker").addEventListener('input', (e) => {
     setColor(e.target.value);
-})
+});
+
+document.getElementById("brightness-range").addEventListener('input', (e) => {
+    setBrightness(e.target.value);
+});
 
 function send(URL, data) {
     fetch('/tree/' + URL, {
@@ -16,6 +20,7 @@ function send(URL, data) {
 }
 
 function setColor(color) { send("color/", { "color": color }); }
+function setBrightness(brightness) { send("brightness/", { "brightness": brightness }) }
 function turnOn() { send("on/", null); }
 function turnOff() { send("off/", null); }
  

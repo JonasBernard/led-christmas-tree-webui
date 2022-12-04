@@ -16,3 +16,6 @@ class PiAdapter(Adapter):
 
     def set_color(self, color):
         self.tree.color = Color(color)
+
+    def set_brightness(self, brightness):
+        self.tree.brightness = brightness
