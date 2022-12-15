@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,12 +10,14 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/static/main.js" defer></script>
 </head>
+
 <body class="p-0 m-0 relative">
-    <div id="message-container" class="absolute top-1 w-full"></div> 
+    <div id="message-container" class="absolute top-1 w-full"></div>
 
     <div class="m-auto mt-2 rounded-xl flex flex-col gap-3 lg:w-[500px] w-full bg-neutral-100 p-3">
         <span class="text-xl flex-1 text-center">
-            <span class="text-red-500 m-0 p-0">R</span><span class="text-green-500 m-0 p-0">G</span><span class="text-blue-500 m-0 p-0">B</span>-Christmas-Tree-WebUI
+            <span class="text-red-500 m-0 p-0">R</span><span class="text-green-500 m-0 p-0">G</span><span
+                class="text-blue-500 m-0 p-0">B</span>-Christmas-Tree-WebUI
         </span>
         <div class="bg-neutral-200 rounded-xl flex">
             <button class="p-3 m-1 flex-1 bg-lime-300 rounded-xl" onclick="turnOn()">Turn on</button>
@@ -22,15 +25,23 @@
         </div>
         <div class="bg-neutral-200 rounded-xl p-2">
             <label for="bcolorPicker" class="block mb-2 text-sm font-medium text-gray-900">Color</label>
-            <input id="colorPicker" type="color" class="w-full" value="#ffffff"/>
+            <input id="colorPicker" type="color" class="w-full" value="#ffffff" />
+            <div class="flex gap-1">
+                <div id="savedColorHolder">
+                </div>
+                <button class="px-2 rounded-full bg-blue-500" onclick="saveColor()">+</button>
+                <button class="px-2 rounded-full bg-red-500" onclick="removeColor()">-</button>
+            </div>
         </div>
 
         <div class="bg-neutral-200 rounded-xl p-2">
             <label for="brightness-range" class="block mb-2 text-sm font-medium text-gray-900">Brightness</label>
-            <input id="brightness-range" type="range" value="0.5" min="0" max="1" step="0.01" class="w-full h-2 bg-neutral-300 rounded-xl appearance-none cursor-pointer">
+            <input id="brightness-range" type="range" value="0.5" min="0" max="1" step="0.01"
+                class="w-full h-2 bg-neutral-300 rounded-xl appearance-none cursor-pointer">
         </div>
 
     </div>
 
 </body>
+
 </html>
