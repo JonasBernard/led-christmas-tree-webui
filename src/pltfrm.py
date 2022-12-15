@@ -6,7 +6,7 @@ def get_adapter():
         from adapters.pi import PiAdapter
 
         adapter = PiAdapter()
-    except Error as e:
+    except Exception as e:
         print(e)
         print("The package gpiozero was not found. Assuming the server is not running on a pi.")
         print("If this is running on a Raspberry pi, install by:")
