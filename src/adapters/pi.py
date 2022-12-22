@@ -41,8 +41,8 @@ class PiPixel(PixelAdapter):
     def set_color(self, color):
         if color.difference(self.last_color) < 0.05:
             return
-        self.pixel.value = color
+        self.pixel.color = color
         self.last_color = color
 
     def get_color(self):
-        return self.pixel.value
+        return self.pixel.color
