@@ -34,4 +34,4 @@ class PiPixel(PixelAdapter):
         self.pixel = pixel_or_id
     
     def set_brightness(self, brightness):
-        self.pixel.set_brightness(brightness)
+        self.pixel.brightness = brightness
