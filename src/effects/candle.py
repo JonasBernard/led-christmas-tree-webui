@@ -38,4 +38,3 @@ class CandleEffect(Effect):
                 else:
                     pixel.set_color(base_color())
 
-            time.sleep(0.02)
