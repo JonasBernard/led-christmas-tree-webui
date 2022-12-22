@@ -1,8 +1,8 @@
 from effects.effect import Effect
 import threading
-import math
 import time
 import random
+
 
 class CandleEffect(Effect):
     def __init__(self, adapter) -> None:
@@ -10,7 +10,14 @@ class CandleEffect(Effect):
         self.started = False
         self.min = 0.2
         self.max = 0.6
-        self.thread = threading.Thread(target=self.flicker_thread, args=[adapter, lambda: self.started, lambda: self.min, lambda: self.max])
+        self.windiness = 0.3
+        self.thread = threading.Thread(target=self.flicker_thread, args=[adapter,
+                                                                         lambda: self.started,
+                                                                         lambda: self.min,
+                                                                         lambda: self.max,
+                                                                         self.adapter.get_brightness(),
+                                                                         lambda: self.windiness
+                                                                         ])
 
     def setup(self):
         self.started = True
@@ -20,22 +27,14 @@ class CandleEffect(Effect):
         self.started = False
         self.thread.join()
 
-    def flicker_thread(self, adapter, should_run_on, min, max):
-        i = 1
-        m = 1
-        frequency = 2
+    def flicker_thread(self, adapter, should_run_on, min, max, base_brightness, windiness):
         while should_run_on():
-            #i = i+1
 
-            #if i % m == 0:
-                # set the frequency of the sine wave to a random value between 0.5 and 2 cycles per second
-                #frequency = random.uniform(0.5, 2)
-                # i = 0
-                #m = random.randint(1,5)
+            for pixel in adapter.tree():
+                if (random.random() < windiness()):
+                    b = (max()-min()) * random.random()
+                    pixel.set_brightness(b)
+                else:
+                    pixel.set_brightness(base_brightness)
 
-            # set the brightness to a value between 0 and 1 based on a sine wave with the specified frequency
-            brightness = ((math.sin(time.time() * frequency)+1)/2) * (max()-min()) + min()
-            print(brightness)
-            adapter.set_brightness(brightness)
-            # pause for a short amount of time
-            # time.sleep(0.1)
+            time.sleep(0.1)

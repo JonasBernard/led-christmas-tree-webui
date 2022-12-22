@@ -1,8 +1,7 @@
-from adapters.adapter import Adapter
+from adapters.adapter import Adapter, PixelAdapter
 from colorzero import Color
-from effects.none import NoneEffect
 
-from lib.tree import RGBXmasTree, Pixel
+from lib.tree import RGBXmasTree
 
 class PiAdapter(Adapter):
     def __init__(self) -> None:
@@ -23,4 +22,16 @@ class PiAdapter(Adapter):
     def set_brightness(self, brightness):
         self.tree.brightness = brightness
 
+    def get_brightness(self):
+        return self.tree.brightness
+
+    def tree(self):
+        return [PiPixel(pixel) for pixel in self.tree]
+
+class PiPixel(PixelAdapter):
+    def __init__(self, pixel_or_id) -> None:
+        super().__init__()
+        self.pixel = pixel_or_id
     
+    def set_brightness(self, brightness):
+        self.pixel.set_brightness(brightness)

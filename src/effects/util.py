@@ -1,9 +1,12 @@
 from effects.none import NoneEffect
 from effects.candle import CandleEffect
+from effects.breathe import BreatheEffect
 
 class EffectUtils:
     def get_effect_by_name(name, adapter):
         effect = NoneEffect(adapter)
-        if name == "candle":
+        if name == "breathe":
+            effect = BreatheEffect(adapter)
+        elif name == "candle":
             effect = CandleEffect(adapter)
         return effect

@@ -21,7 +21,20 @@ class Adapter(ABC):
     def set_brightness(self, brightness):
         pass
 
+    @abstractmethod
+    def get_brightness(self):
+        pass
+
     def set_effect(self, effect):
         self.effect.teardown()
         self.effect = effect
         self.effect.setup()
+
+    @abstractmethod
+    def tree(self):
+        pass
+
+class PixelAdapter(ABC):
+    @abstractmethod
+    def set_brightness(self, brightness):
+        pass
