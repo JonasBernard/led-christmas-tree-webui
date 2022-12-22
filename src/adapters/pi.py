@@ -36,6 +36,7 @@ class PiPixel(PixelAdapter):
     def __init__(self, pixel_or_id) -> None:
         super().__init__()
         self.pixel = pixel_or_id
+        self.last_color = Color('black')
     
     def set_color(self, color):
         if color.difference(self.last_color) < 0.05:
