@@ -29,7 +29,7 @@ class CandleEffect(Effect):
         while should_run_on():
             for pixel in adapter.get_pixels():
                 if (random.random() < windiness() and pixel.get_color().difference(base_color()) < 0.05):
-                    rand = factor * random.random()
+                    rand = factor() * random.random()
                     pixel.set_color(base_color() * Lightness(rand))
                 else:
                     pixel.set_color(base_color())
