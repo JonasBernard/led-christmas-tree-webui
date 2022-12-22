@@ -34,6 +34,9 @@ function turnOn() {
 function turnOff() {
   send("off/", null);
 }
+function setEffect(effect) {
+  send("effect/", { "effect-name": effect })
+}
 
 let timer = null;
 

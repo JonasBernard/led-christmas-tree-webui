@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
+from effects.none import NoneEffect
 
 class Adapter(ABC):
     def __init__(self) -> None:
-        pass
+        self.effect = NoneEffect(None)
 
     @abstractmethod
     def off(self):
@@ -15,3 +16,12 @@ class Adapter(ABC):
     @abstractmethod
     def set_color(self, color):
         pass
+
+    @abstractmethod
+    def set_brightness(self, brightness):
+        pass
+
+    def set_effect(self, effect):
+        self.effect.teardown()
+        self.effect = effect
+        self.effect.setup()
