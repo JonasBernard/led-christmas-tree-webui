@@ -20,7 +20,7 @@ class DummyAdapter(Adapter):
     def get_brightness(self):
         return self.brightness
 
-    def tree(self):
+    def get_pixels(self):
         return [DummyPixel(id) for id in range(1, 25)]
 
 class DummyPixel(PixelAdapter):

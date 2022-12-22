@@ -25,7 +25,7 @@ class PiAdapter(Adapter):
     def get_brightness(self):
         return self.tree.brightness
 
-    def tree(self):
+    def get_pixels(self):
         return [PiPixel(pixel) for pixel in self.tree]
 
 class PiPixel(PixelAdapter):

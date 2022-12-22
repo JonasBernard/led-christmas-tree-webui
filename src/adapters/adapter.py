@@ -31,7 +31,7 @@ class Adapter(ABC):
         self.effect.setup()
 
     @abstractmethod
-    def tree(self):
+    def get_pixels(self):
         pass
 
 class PixelAdapter(ABC):

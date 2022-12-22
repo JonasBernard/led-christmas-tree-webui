@@ -30,7 +30,7 @@ class CandleEffect(Effect):
     def flicker_thread(self, adapter, should_run_on, min, max, base_brightness, windiness):
         while should_run_on():
 
-            for pixel in adapter.tree():
+            for pixel in adapter.get_pixels():
                 if (random.random() < windiness()):
                     b = (max()-min()) * random.random()
                     pixel.set_brightness(b)
