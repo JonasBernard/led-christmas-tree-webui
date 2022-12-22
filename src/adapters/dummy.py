@@ -33,4 +33,8 @@ class DummyPixel(PixelAdapter):
         self.id = pixel_or_id
     
     def set_color(self, color):
+        self.color = color
         print("[Pixel " + self.id + "] Set color to " + str(color))
+
+    def get_color(self):
+        return self.color

@@ -42,3 +42,7 @@ class PixelAdapter(ABC):
     @abstractmethod
     def set_color(self, brightness):
         pass
+
+    @abstractmethod
+    def get_color(self):
+        pass

@@ -39,3 +39,6 @@ class PiPixel(PixelAdapter):
     
     def set_color(self, color):
         self.pixel.value = color
+
+    def get_color(self):
+        return self.pixel.value

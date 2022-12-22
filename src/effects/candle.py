@@ -10,7 +10,7 @@ class CandleEffect(Effect):
         self.started = False
         self.min = 0.2
         self.max = 0.6
-        self.windiness = 0.1
+        self.windiness = 0.2
         self.thread = threading.Thread(target=self.flicker_thread, args=[adapter,
                                                                          lambda: self.started,
                                                                          lambda: self.min,
@@ -29,11 +29,11 @@ class CandleEffect(Effect):
 
     def flicker_thread(self, adapter, should_run_on, min, max, base_color, windiness):
         while should_run_on():
-
             for pixel in adapter.get_pixels():
-                if (random.random() < windiness()):
+                if (random.random() < windiness() and pixel.get_color() is base_color()):
                     r,g,b = base_color()
-                    dark = (r * 0.7 * random.random(), g * 0.7 * random.random(), b * 0.7 * random.random())
+                    rand = random.random()
+                    dark = (r * 0.7 * rand, g * 0.7 * rand, b * 0.7 * rand)
                     pixel.set_color(dark)
                 else:
                     pixel.set_color(base_color())
