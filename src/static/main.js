@@ -74,6 +74,8 @@ function saveColor() {
 function loadSavedColors() {
   savedColors = JSON.parse(window.localStorage.getItem("savedColors"));
 
+  if (!Array.isArray(savedColors)) savedColors = [];
+
   let genHTML = "";
   for (let color of savedColors) {
     genHTML += `\n<button class="px-3 py-1 rounded-xl" style="height: 1.5em; background-color: ${color}" onclick="applyColor('${color}')"></button>`;
@@ -85,6 +87,10 @@ function loadSavedColors() {
 function applyColor(color) {
     document.getElementById('colorPicker').value = color;
     setColor(color);
+}
+
+function reapplyColor() {
+  setColor(document.getElementById('colorPicker').value);
 }
 
 function removeColor() {

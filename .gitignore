@@ -4,3 +4,5 @@ venv/
 src/__pycache__/
 
 src/adapters/__pycache__/
+
+src/effects/__pycache__/
