@@ -34,8 +34,8 @@ class CandleEffect(Effect):
                 if (random.random() < windiness()):
                     r,g,b = base_color
                     dark = (r * 0.1, g * 0.1, b * 0.1)
-                    pixel.color(dark)
+                    pixel.set_color(dark)
                 else:
-                    pixel.color(base_color)
+                    pixel.set_color(base_color)
 
             time.sleep(0.1)
