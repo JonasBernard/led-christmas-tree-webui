@@ -10,7 +10,7 @@ class CandleEffect(Effect):
         self.started = False
         self.min = 0.2
         self.max = 0.6
-        self.windiness = 0.3
+        self.windiness = 0.1
         self.thread = threading.Thread(target=self.flicker_thread, args=[adapter,
                                                                          lambda: self.started,
                                                                          lambda: self.min,
