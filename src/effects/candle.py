@@ -15,7 +15,7 @@ class CandleEffect(Effect):
                                                                          lambda: self.started,
                                                                          lambda: self.min,
                                                                          lambda: self.max,
-                                                                         self.adapter.get_color(),
+                                                                         lambda: self.adapter.get_color(),
                                                                          lambda: self.windiness
                                                                          ])
 
@@ -32,10 +32,10 @@ class CandleEffect(Effect):
 
             for pixel in adapter.get_pixels():
                 if (random.random() < windiness()):
-                    r,g,b = base_color
-                    dark = (r * 0.1, g * 0.1, b * 0.1)
+                    r,g,b = base_color()
+                    dark = (r * 0.7 * random.random(), g * 0.7 * random.random(), b * 0.7 * random.random())
                     pixel.set_color(dark)
                 else:
-                    pixel.set_color(base_color)
+                    pixel.set_color(base_color())
 
-            time.sleep(0.1)
+            time.sleep(0.02)
