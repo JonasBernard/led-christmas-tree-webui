@@ -19,6 +19,9 @@ class PiAdapter(Adapter):
     def set_color(self, color):
         self.tree.color = Color(color)
 
+    def get_color(self):
+        return self.tree.color
+
     def set_brightness(self, brightness):
         self.tree.brightness = brightness
 
@@ -33,5 +36,5 @@ class PiPixel(PixelAdapter):
         super().__init__()
         self.pixel = pixel_or_id
     
-    def set_brightness(self, brightness):
-        self.pixel.brightness = brightness
+    def set_color(self, color):
+        self.pixel.value = color

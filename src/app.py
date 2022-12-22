@@ -38,7 +38,7 @@ def tree_brightness_post():
     except KeyError or Exception as e:
         brightness = 0.5
     adapter.set_brightness(brightness)
-    return { "message": "Set brightness to " + brightness + "." }
+    return { "message": "Set brightness to " + str(brightness) + "." }
 
 
 @app.post("/tree/effect/")

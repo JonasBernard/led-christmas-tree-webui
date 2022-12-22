@@ -11,7 +11,11 @@ class DummyAdapter(Adapter):
         print("Turned tree on")
 
     def set_color(self, color):
+        self.color = color
         print("Set color to " + color)
+
+    def get_color(self):
+        return self.color
 
     def set_brightness(self, brightness):
         self.brightness = brightness
@@ -28,5 +32,5 @@ class DummyPixel(PixelAdapter):
         super().__init__()
         self.id = pixel_or_id
     
-    def set_brightness(self, brightness):
-        print("[Pixel " + self.id + "] Set brightness to " + str(brightness))
+    def set_color(self, color):
+        print("[Pixel " + self.id + "] Set color to " + str(color))
