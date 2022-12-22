@@ -17,7 +17,7 @@ class PiAdapter(Adapter):
         self.effect.setup()
 
     def set_color(self, color):
-        self.overall_color = color
+        self.overall_color = Color(color)
         self.tree.color = Color(color)
 
     def get_color(self):
