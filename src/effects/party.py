@@ -17,7 +17,7 @@ class PartyEffect(Effect):
         }
 
     def setup(self):
-        self.thread = threading.Thread(target=self.thread, args=[
+        self.runner = threading.Thread(target=self.runner, args=[
             self.adapter,
             lambda: self.started,
             lambda: self.params["speed"],
@@ -26,13 +26,13 @@ class PartyEffect(Effect):
             lambda: self.params["per-pixel"]
         ])
         self.started = True
-        self.thread.start()
+        self.runner.start()
 
     def teardown(self):
         self.started = False
-        self.thread.join()
+        self.runner.join()
 
-    def thread(self, adapter, should_run_on, speed, saturation, value, per_pixel):
+    def runner(self, adapter, should_run_on, speed, saturation, value, per_pixel):
         while should_run_on():
             if per_pixel():
                 for pixel in adapter.get_pixels():

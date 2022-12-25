@@ -16,7 +16,7 @@ class CandleEffect(Effect):
         }
 
     def setup(self):
-        self.thread = threading.Thread(target=self.thread, args=[
+        self.runner = threading.Thread(target=self.runner, args=[
             self.adapter,
             lambda: self.started,
             lambda: self.params["factor"],
@@ -24,13 +24,13 @@ class CandleEffect(Effect):
             lambda: self.params["windiness"]
         ])
         self.started = True
-        self.thread.start()
+        self.runner.start()
 
     def teardown(self):
         self.started = False
-        self.thread.join()
+        self.runner.join()
 
-    def thread(self, adapter, should_run_on, factor, base_color, windiness):
+    def runner(self, adapter, should_run_on, factor, base_color, windiness):
         while should_run_on():
             for pixel in adapter.get_pixels():
                 if (random.random() < windiness() and pixel.get_color().difference(base_color()) < 0.05):
