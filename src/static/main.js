@@ -7,7 +7,7 @@ document.getElementById("brightness-range").addEventListener("input", (e) => {
 });
 
 document.getElementById("party-speed-range").addEventListener("input", (e) => {
-  setParameter("party.speed", e.target.value);
+  setParameter("speed", e.target.value);
 });
 
 function send(URL, data) {
