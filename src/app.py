@@ -5,6 +5,7 @@ from effects.util import EffectUtils
 app = Flask(__name__)
 
 adapter = get_adapter()
+effect_utils = EffectUtils(adapter)
 
 
 @app.route("/", methods=['GET'])
@@ -48,7 +49,7 @@ def tree_effect_post():
     except KeyError or Exception as e:
         effect_name = "none"
     
-    effect = EffectUtils.get_effect_by_name(effect_name, adapter)
+    effect = effect_utils.get_effect_by_name(effect_name)
     adapter.set_effect(effect)
 
     return { "message": "Set effect to " + effect_name + "." }
