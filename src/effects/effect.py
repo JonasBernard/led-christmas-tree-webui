@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class Effect(ABC):
     def __init__(self, adapter) -> None:
-        pass
+        self.params = {}
 
     @abstractmethod
     def setup(self):
@@ -11,3 +11,6 @@ class Effect(ABC):
     @abstractmethod
     def teardown(self):
         pass
+
+    def set_param(self, key, value):
+        self.params[key] = value

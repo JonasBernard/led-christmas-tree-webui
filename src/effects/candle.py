@@ -4,17 +4,21 @@ import time
 import random
 from colorzero import Lightness
 
+
 class CandleEffect(Effect):
     def __init__(self, adapter) -> None:
+        super().__init__(adapter)
         self.adapter = adapter
         self.started = False
-        self.factor = 0.7
-        self.windiness = 0.2
+        self.params = {
+            "factor": 0.7,
+            "windiness": 0.2
+        }
         self.thread = threading.Thread(target=self.flicker_thread, args=[adapter,
                                                                          lambda: self.started,
-                                                                         lambda: self.factor,
+                                                                         lambda: self.params["factor"],
                                                                          lambda: self.adapter.get_color(),
-                                                                         lambda: self.windiness
+                                                                         lambda: self.params["windiness"]
                                                                          ])
 
     def setup(self):
@@ -33,4 +37,3 @@ class CandleEffect(Effect):
                     pixel.set_color(base_color() * Lightness(rand))
                 else:
                     pixel.set_color(base_color())
-

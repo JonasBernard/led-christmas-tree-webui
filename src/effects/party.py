@@ -6,16 +6,19 @@ from colorzero import Color
 
 class PartyEffect(Effect):
     def __init__(self, adapter) -> None:
+        super().__init__(adapter)
         self.adapter = adapter
         self.started = False
-        self.speed = 1
-        self.saturation = 1
-        self.value = 1
+        self.params = {
+            "speed": 1,
+            "saturation": 1,
+            "value": 1
+        }
         self.thread = threading.Thread(target=self.thread, args=[adapter,
                                                                          lambda: self.started,
-                                                                         lambda: self.speed,
-                                                                         lambda: self.saturation,
-                                                                         lambda: self.value
+                                                                         lambda: self.params["speed"],
+                                                                         lambda: self.params["saturation"],
+                                                                         lambda: self.params["value"]
                                                                          ])
 
     def setup(self):

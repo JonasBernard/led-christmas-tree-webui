@@ -6,6 +6,10 @@ document.getElementById("brightness-range").addEventListener("input", (e) => {
   setBrightness(e.target.value);
 });
 
+document.getElementById("party-speed-range").addEventListener("input", (e) => {
+  setParameter("party.speed", e.target.value);
+});
+
 function send(URL, data) {
   fetch("/tree/" + URL, {
     method: "POST",
@@ -37,6 +41,9 @@ function turnOff() {
 function setEffect(effect) {
   send("effect/", { "effect-name": effect })
 }
+function setParameter(key, value) {
+  send("effect/parameter/", { "key": key, "value": value });
+}
 
 let timer = null;
 
@@ -48,7 +55,7 @@ function setMessage(message) {
   document.getElementById(
     "message-container"
   ).innerHTML = `<div class="flex justify-center">
-            <div class="flex gap-4 bg-green-300 rounded-xl px-4 py-2">
+            <div class="flex gap-4 bg-green-300 rounded-xl px-4 py-2 w-[350px] justify-between">
                 ${message}
                 <span><button onclick="closeMessage()">&#x2715</s></span>
             </div>

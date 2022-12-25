@@ -53,3 +53,16 @@ def tree_effect_post():
 
     return { "message": "Set effect to " + effect_name + "." }
 
+
+@app.post("/tree/effect/parameter/")
+def tree_effect_param_post():
+    try:
+        param_key = request.json['key']
+        param_value = float(request.json['value'])
+    except KeyError or Exception as e:
+        return { "message": "Invalid request to set effect paramter." }
+
+    adapter.effect.set_param(param_key, param_value)
+    
+    return { "message": "Set parameter " + param_key + "=" + str(param_value) }
+    

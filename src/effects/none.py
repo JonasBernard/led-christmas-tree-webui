@@ -2,7 +2,7 @@ from effects.effect import Effect
 
 class NoneEffect(Effect):
     def __init__(self, adapter) -> None:
-        pass
+        super().__init__(adapter)
 
     def setup(self):
         pass
