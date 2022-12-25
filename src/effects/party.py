@@ -33,7 +33,7 @@ class PartyEffect(Effect):
 
     def thread(self, adapter, should_run_on, speed, saturation, value, per_pixel):
         while should_run_on():
-            if per_pixel:
+            if per_pixel():
                 for pixel in adapter.get_pixels():
                     hue = random.random()
                     color = Color(h=hue, s=saturation(), v=value())
