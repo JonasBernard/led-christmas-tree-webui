@@ -12,7 +12,7 @@ class DummyAdapter(Adapter):
 
     def set_color(self, color):
         self.color = color
-        print("Set color to " + color)
+        print("Set color to " + str(color))
 
     def get_color(self):
         return self.color
