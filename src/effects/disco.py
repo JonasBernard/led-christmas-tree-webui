@@ -4,7 +4,7 @@ import time
 import random
 from colorzero import Color
 
-class PartyEffect(Effect):
+class DiscoEffect(Effect):
     def __init__(self, adapter) -> None:
         super().__init__(adapter)
         self.adapter = adapter
@@ -12,15 +12,13 @@ class PartyEffect(Effect):
         self.params = {
             "speed": 1,
             "saturation": 1,
-            "value": 1,
-            "per-pixel": False,
+            "value": 1
         }
         self.thread = threading.Thread(target=self.thread, args=[adapter,
                                                                          lambda: self.started,
                                                                          lambda: self.params["speed"],
                                                                          lambda: self.params["saturation"],
-                                                                         lambda: self.params["value"],
-                                                                         lambda: self.params["per-pixel"]
+                                                                         lambda: self.params["value"]
                                                                          ])
 
     def setup(self):
@@ -31,15 +29,9 @@ class PartyEffect(Effect):
         self.started = False
         self.thread.join()
 
-    def thread(self, adapter, should_run_on, speed, saturation, value, per_pixel):
+    def thread(self, adapter, should_run_on, speed, saturation, value):
         while should_run_on():
-            if per_pixel:
-                for pixel in adapter.get_pixels():
-                    hue = random.random()
-                    color = Color(h=hue, s=saturation(), v=value())
-                    pixel.set_color(color)
-            else:
-                hue = random.random()
-                color = Color(h=hue, s=saturation(), v=value())
-                adapter.set_color(color)
+            hue = random.random()
+            color = Color(h=hue, s=saturation(), v=value())
+            adapter.set_color(color)
             time.sleep(5 - speed())

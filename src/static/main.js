@@ -2,21 +2,25 @@ document.getElementById("colorPicker").addEventListener("input", (e) => {
   setColor(e.target.value);
 });
 
-document.getElementById("brightness-range").addEventListener("input", (e) => {
+document.getElementById("brightness-float").addEventListener("input", (e) => {
   setBrightness(e.target.value);
 });
 
-for (let [effect, param] of [
-  ["breathe", "min"],
-  ["breathe", "max"],
-  ["breathe", "frequency"],
-  ["candle", "factor"],
-  ["candle", "windiness"],
-  ["party", "speed"]
+for (let [effect, param, type] of [
+  ["breathe", "min", "float"],
+  ["breathe", "max", "float"],
+  ["breathe", "frequency", "float"],
+  ["candle", "factor", "float"],
+  ["candle", "windiness", "float"],
+  ["party", "speed", "float"],
+  ["party", "saturation", "float"],
+  ["party", "value", "float"],
+  ["party", "per-pixel", "bool"],
 ]) {
   try {
-    document.getElementById(`${effect}-${param}-range`).addEventListener("input", (e) => {
-      setParameter(param, e.target.value);
+    document.getElementById(`${effect}-${param}-${type}`).addEventListener("input", (e) => {
+      let value = type=="bool" ? e.target.checked : e.target.value;
+      setParameter(param, value, type);
     });
   } catch (e) {
     console.log("Could not add event listener for parameter:", effect, param);
@@ -55,8 +59,8 @@ function setEffect(effect) {
   send("effect/", { "effect-name": effect });
   dispayHTML(effect);
 }
-function setParameter(key, value) {
-  send("effect/parameter/", { "key": key, "value": value });
+function setParameter(key, value, type) {
+  send("effect/parameter/", { "key": key, "value": value, "type": type });
 }
 
 let timer = null;

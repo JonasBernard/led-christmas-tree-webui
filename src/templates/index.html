@@ -40,8 +40,8 @@
         </div>
 
         <div class="bg-neutral-200 rounded-xl p-2">
-            <label for="brightness-range" class="block mb-2 text-sm font-medium text-gray-900">Brightness</label>
-            <input id="brightness-range" type="range" value="0.5" min="0" max="1" step="0.01"
+            <label for="brightness-float" class="block mb-2 text-sm font-medium text-gray-900">Brightness</label>
+            <input id="brightness-float" type="range" value="0.5" min="0" max="1" step="0.01"
                 class="w-full h-2 bg-neutral-300 rounded-xl appearance-none cursor-pointer">
         </div>
 
@@ -50,47 +50,63 @@
             <div class="flex">
                 <button class="p-3 m-1 bg-neutral-600 text-white rounded-xl" onclick="setEffect('none')">No effect</button>
                 <button class="p-3 m-1 bg-blue-300 rounded-xl" onclick="setEffect('breathe')">Breathe</button>
-                <button class="p-3 m-1 bg-amber-500 rounded-xl" onclick="setEffect('candle')">Candle lights</button>
+                <button class="p-3 m-1 bg-amber-500 rounded-xl" onclick="setEffect('candle')">Candle</button>
                 <button class="p-3 m-1 bg-pink-500 rounded-xl" onclick="setEffect('party')">Party</button>
+                <button class="p-3 m-1 bg-green-400 rounded-xl" onclick="setEffect('disco')">Disco</button>
             </div>
         </div>
 
         <div id="breathe-parameters" style="display: none;" class="flex-col gap-2">
             <div class="bg-neutral-200 rounded-xl p-2 bg-blue-300">
-                <label for="breathe-min-range" class="block mb-2 text-sm font-medium text-gray-900">Minimal brightness</label>
-                <input id="breathe-min-range" type="range" value="0.2" min="0" max="1" step="0.05"
+                <label for="breathe-min-float" class="block mb-2 text-sm font-medium text-gray-900">Minimal brightness</label>
+                <input id="breathe-min-float" type="range" value="0.2" min="0" max="1" step="0.05"
                     class="w-full h-2 bg-blue-500 accent-blue-800 rounded-xl appearance-none cursor-pointer">
             </div>
             <div class="bg-neutral-200 rounded-xl p-2 bg-blue-300">
-                <label for="breathe-max-range" class="block mb-2 text-sm font-medium text-gray-900">Maximal brightness</label>
-                <input id="breathe-max-range" type="range" value="0.6" min="0" max="1" step="0.05"
+                <label for="breathe-max-float" class="block mb-2 text-sm font-medium text-gray-900">Maximal brightness</label>
+                <input id="breathe-max-float" type="range" value="0.6" min="0" max="1" step="0.05"
                     class="w-full h-2 bg-blue-500 accent-blue-800 rounded-xl appearance-none cursor-pointer">
             </div>
             <div class="bg-neutral-200 rounded-xl p-2 bg-blue-300">
-                <label for="breathe-frequency-range" class="block mb-2 text-sm font-medium text-gray-900">Frequency</label>
-                <input id="breathe-frequency-range" type="range" value="2" min="0.1" max="5" step="0.05"
+                <label for="breathe-frequency-float" class="block mb-2 text-sm font-medium text-gray-900">Frequency</label>
+                <input id="breathe-frequency-float" type="range" value="2" min="0.1" max="5" step="0.05"
                     class="w-full h-2 bg-blue-500 accent-blue-800 rounded-xl appearance-none cursor-pointer">
             </div>
         </div>
 
         <div id="candle-parameters" style="display: none;" class="flex-col gap-2">
             <div class="bg-neutral-200 rounded-xl p-2 bg-amber-300">
-                <label for="candle-factor-range" class="block mb-2 text-sm font-medium text-gray-900">Factor</label>
-                <input id="candle-factor-range" type="range" value="1" min="0" max="5" step="0.05"
+                <label for="candle-factor-float" class="block mb-2 text-sm font-medium text-gray-900">Factor</label>
+                <input id="candle-factor-float" type="range" value="0.7" min="0" max="1" step="0.01"
                     class="w-full h-2 bg-amber-500 accent-amber-800 rounded-xl appearance-none cursor-pointer">
             </div>
             <div class="bg-neutral-200 rounded-xl p-2 bg-amber-300">
-                <label for="candle-windiness-range" class="block mb-2 text-sm font-medium text-gray-900">Windiness</label>
-                <input id="candle-windiness-range" type="range" value="1" min="0" max="5" step="0.05"
+                <label for="candle-windiness-float" class="block mb-2 text-sm font-medium text-gray-900">Windiness</label>
+                <input id="candle-windiness-float" type="range" value="0.2" min="0" max="1" step="0.01"
                     class="w-full h-2 bg-amber-500 accent-amber-800 rounded-xl appearance-none cursor-pointer">
             </div>
         </div>
 
         <div id="party-parameters" style="display: none;" class="flex-col gap-2">
             <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300">
-                <label for="party-speed-range" class="block mb-2 text-sm font-medium text-gray-900">Speed</label>
-                <input id="party-speed-range" type="range" value="1" min="0" max="5" step="0.05"
+                <label for="party-speed-float" class="block mb-2 text-sm font-medium text-gray-900">Speed</label>
+                <input id="party-speed-float" type="range" value="1" min="0" max="5" step="0.05"
                     class="w-full h-2 bg-pink-500 accent-pink-800 rounded-xl appearance-none cursor-pointer">
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300">
+                <label for="party-saturation-float" class="block mb-2 text-sm font-medium text-gray-900">Saturation</label>
+                <input id="party-saturation-float" type="range" value="1" min="0" max="1" step="0.01"
+                    class="w-full h-2 bg-pink-500 accent-pink-800 rounded-xl appearance-none cursor-pointer">
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300">
+                <label for="party-value-float" class="block mb-2 text-sm font-medium text-gray-900">Value</label>
+                <input id="party-value-float" type="range" value="1" min="0" max="1" step="0.01"
+                    class="w-full h-2 bg-pink-500 accent-pink-800 rounded-xl appearance-none cursor-pointer">
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300 flex items-baseline">
+                <input id="party-per-pixel-bool" type="checkbox" value="0"
+                class="accent-pink-500 rounded-xl cursor-pointer">
+                <label for="party-per-pixel-bool" class="block ml-2 text-sm font-medium text-gray-900">Use effect per LED</label>
             </div>
         </div>
 

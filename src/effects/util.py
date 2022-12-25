@@ -2,6 +2,7 @@ from effects.none import NoneEffect
 from effects.candle import CandleEffect
 from effects.breathe import BreatheEffect
 from effects.party import PartyEffect
+from effects.disco import DiscoEffect
 
 class EffectUtils:
     def get_effect_by_name(name, adapter):
@@ -12,4 +13,6 @@ class EffectUtils:
             effect = CandleEffect(adapter)
         elif name == "party":
             effect = PartyEffect(adapter)
+        elif name == "disco":
+            effect = DiscoEffect(adapter)
         return effect

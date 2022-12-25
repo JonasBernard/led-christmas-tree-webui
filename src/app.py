@@ -58,11 +58,21 @@ def tree_effect_post():
 def tree_effect_param_post():
     try:
         param_key = request.json['key']
-        param_value = float(request.json['value'])
+        param_value_raw = request.json['value']
+        type = request.json['type']
     except KeyError or Exception as e:
-        return { "message": "Invalid request to set effect paramter." }
+        return { "message": "Incomplete request to set effect paramter." }
+
+    param_value = None
+    if type == "float":
+        param_value = float(param_value_raw)
+    if type == "bool":
+        param_value = bool(param_value_raw)
+
+    if param_value is None:
+        return { "message": "Got a parameter of an invalid type." }
 
     adapter.effect.set_param(param_key, param_value)
     
-    return { "message": "Set parameter " + param_key + "=" + str(param_value) }
+    return { "message": "Set parameter " + param_key + " to " + str(param_value_raw) }
     
