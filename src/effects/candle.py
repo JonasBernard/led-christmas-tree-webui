@@ -14,14 +14,15 @@ class CandleEffect(Effect):
             "factor": 0.7,
             "windiness": 0.2
         }
-        self.thread = threading.Thread(target=self.flicker_thread, args=[adapter,
-                                                                         lambda: self.started,
-                                                                         lambda: self.params["factor"],
-                                                                         lambda: self.adapter.get_color(),
-                                                                         lambda: self.params["windiness"]
-                                                                         ])
 
     def setup(self):
+        self.thread = threading.Thread(target=self.thread, args=[
+            self.adapter,
+            lambda: self.started,
+            lambda: self.params["factor"],
+            lambda: self.adapter.get_color(),
+            lambda: self.params["windiness"]
+        ])
         self.started = True
         self.thread.start()
 
@@ -29,7 +30,7 @@ class CandleEffect(Effect):
         self.started = False
         self.thread.join()
 
-    def flicker_thread(self, adapter, should_run_on, factor, base_color, windiness):
+    def thread(self, adapter, should_run_on, factor, base_color, windiness):
         while should_run_on():
             for pixel in adapter.get_pixels():
                 if (random.random() < windiness() and pixel.get_color().difference(base_color()) < 0.05):

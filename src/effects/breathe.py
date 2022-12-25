@@ -15,11 +15,11 @@ class BreatheEffect(Effect):
             "max": 0.6,
             "frequency": 2.0
         }
-        self.thread = threading.Thread(target=self.flicker_thread, args=[
-                                       adapter, lambda: self.started, lambda: self.params["min"], 
-                                       lambda: self.params["max"], lambda: self.params["frequency"]])
 
     def setup(self):
+        self.thread = threading.Thread(target=self.thread, args=[
+                                       self.adapter, lambda: self.started, lambda: self.params["min"], 
+                                       lambda: self.params["max"], lambda: self.params["frequency"]])
         self.started = True
         self.thread.start()
 
@@ -27,7 +27,7 @@ class BreatheEffect(Effect):
         self.started = False
         self.thread.join()
 
-    def flicker_thread(self, adapter, should_run_on, min, max, frequency):
+    def thread(self, adapter, should_run_on, min, max, frequency):
         while should_run_on():
             # set the brightness to a value between min and max based on a sine wave with the specified frequency
             brightness = ((math.sin(time.time() * frequency())+1) /

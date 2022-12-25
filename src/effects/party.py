@@ -15,15 +15,16 @@ class PartyEffect(Effect):
             "value": 1,
             "per-pixel": False,
         }
-        self.thread = threading.Thread(target=self.thread, args=[adapter,
-                                                                         lambda: self.started,
-                                                                         lambda: self.params["speed"],
-                                                                         lambda: self.params["saturation"],
-                                                                         lambda: self.params["value"],
-                                                                         lambda: self.params["per-pixel"]
-                                                                         ])
 
     def setup(self):
+        self.thread = threading.Thread(target=self.thread, args=[
+            self.adapter,
+            lambda: self.started,
+            lambda: self.params["speed"],
+            lambda: self.params["saturation"],
+            lambda: self.params["value"],
+            lambda: self.params["per-pixel"]
+        ])
         self.started = True
         self.thread.start()
 

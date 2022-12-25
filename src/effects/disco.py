@@ -14,14 +14,15 @@ class DiscoEffect(Effect):
             "saturation": 1,
             "value": 1
         }
-        self.thread = threading.Thread(target=self.thread, args=[adapter,
-                                                                         lambda: self.started,
-                                                                         lambda: self.params["speed"],
-                                                                         lambda: self.params["saturation"],
-                                                                         lambda: self.params["value"]
-                                                                         ])
 
     def setup(self):
+        self.thread = threading.Thread(target=self.thread, args=[
+            self.adapter,
+            lambda: self.started,
+            lambda: self.params["speed"],
+            lambda: self.params["saturation"],
+            lambda: self.params["value"]
+        ])
         self.started = True
         self.thread.start()
 
