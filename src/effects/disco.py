@@ -16,7 +16,7 @@ class DiscoEffect(Effect):
         }
 
     def setup(self):
-        self.runner = threading.Thread(target=self.runner, args=[
+        self.thread = threading.Thread(target=self.runner, args=[
             self.adapter,
             lambda: self.started,
             lambda: self.params["speed"],
@@ -24,11 +24,11 @@ class DiscoEffect(Effect):
             lambda: self.params["value"]
         ])
         self.started = True
-        self.runner.start()
+        self.thread.start()
 
     def teardown(self):
         self.started = False
-        self.runner.join()
+        self.thread.join()
 
     def runner(self, adapter, should_run_on, speed, saturation, value):
         while should_run_on():

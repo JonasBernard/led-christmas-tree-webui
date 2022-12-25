@@ -17,15 +17,15 @@ class BreatheEffect(Effect):
         }
 
     def setup(self):
-        self.runner = threading.Thread(target=self.runner, args=[
+        self.thread = threading.Thread(target=self.runner, args=[
                                        self.adapter, lambda: self.started, lambda: self.params["min"], 
                                        lambda: self.params["max"], lambda: self.params["frequency"]])
         self.started = True
-        self.runner.start()
+        self.thread.start()
 
     def teardown(self):
         self.started = False
-        self.runner.join()
+        self.thread.join()
 
     def runner(self, adapter, should_run_on, min, max, frequency):
         while should_run_on():
