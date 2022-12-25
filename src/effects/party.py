@@ -34,4 +34,4 @@ class PartyEffect(Effect):
             hue = random.random()
             color = Color(h=hue, s=saturation(), v=value())
             adapter.set_color(color)
-            time.sleep(speed())
+            time.sleep(5 - speed())
