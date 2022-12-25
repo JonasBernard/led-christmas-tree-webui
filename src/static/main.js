@@ -6,9 +6,22 @@ document.getElementById("brightness-range").addEventListener("input", (e) => {
   setBrightness(e.target.value);
 });
 
-document.getElementById("party-speed-range").addEventListener("input", (e) => {
-  setParameter("speed", e.target.value);
-});
+for (let [effect, param] of [
+  ["breathe", "min"],
+  ["breathe", "max"],
+  ["breathe", "frequency"],
+  ["candle", "factor"],
+  ["candle", "windiness"],
+  ["party", "speed"]
+]) {
+  try {
+    document.getElementById(`${effect}-${param}-range`).addEventListener("input", (e) => {
+      setParameter(param, e.target.value);
+    });
+  } catch (e) {
+    console.log("Could not add event listener for parameter:", effect, param);
+  }
+}
 
 function send(URL, data) {
   fetch("/tree/" + URL, {
@@ -39,7 +52,8 @@ function turnOff() {
   send("off/", null);
 }
 function setEffect(effect) {
-  send("effect/", { "effect-name": effect })
+  send("effect/", { "effect-name": effect });
+  dispayHTML(effect);
 }
 function setParameter(key, value) {
   send("effect/parameter/", { "key": key, "value": value });
@@ -109,3 +123,16 @@ function removeColor() {
 }
 
 loadSavedColors();
+
+const effects = ["none", "breathe", "candle", "party"];
+function dispayHTML(name) {
+  for (let effect of effects) {
+    let id = `${effect}-parameters`;
+    try {
+      document.getElementById(id).style.display = "none";
+    } catch (e) {}
+  }
+  try {
+    document.getElementById(`${name}-parameters`).style.display = "flex";
+  } catch (e) {}
+}
