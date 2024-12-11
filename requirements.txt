@@ -1,3 +1,2 @@
 Flask
 colorzero
-RPi.GPIO
