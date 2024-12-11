@@ -30,9 +30,12 @@ class Adapter(ABC):
         pass
 
     def set_effect(self, effect):
+        print("Tearing down old effect...")
         self.effect.teardown()
         self.effect = effect
+        print("Done. Starting new effect...")
         self.effect.setup()
+        print("Done")
 
     @abstractmethod
     def get_pixels(self):
