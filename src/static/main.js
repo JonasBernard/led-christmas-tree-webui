@@ -1,3 +1,17 @@
+let disableTimeouts = [];
+
+function disableForm() {
+  disableTimeouts.push(setTimeout(() => 
+    document.getElementById(`overlay`).style.display = "flex"
+  , 400));
+}
+
+function enableForm() {
+  disableTimeouts.forEach(t => clearTimeout(t));
+  disableTimeouts = [];
+  document.getElementById(`overlay`).style.display = "none";
+}
+
 document.getElementById("colorPicker").addEventListener("input", (e) => {
   setColor(e.target.value);
 });
@@ -5,7 +19,9 @@ document.getElementById("colorPicker").addEventListener("input", (e) => {
 document.getElementById("brightness-float").addEventListener("input", (e) => {
   setBrightness(e.target.value);
 });
+setBrightness(0.05);
 
+const effects = ["none", "breathe", "candle", "party", "spiral", "huerotate"];
 for (let [effect, param, type] of [
   ["breathe", "min", "float"],
   ["breathe", "max", "float"],
@@ -16,6 +32,8 @@ for (let [effect, param, type] of [
   ["party", "saturation", "float"],
   ["party", "value", "float"],
   ["party", "per-pixel", "bool"],
+  ["spiral", "length", "int"],
+  ["huerotate", "speed", "float"],
 ]) {
   try {
     document.getElementById(`${effect}-${param}-${type}`).addEventListener("input", (e) => {
@@ -28,6 +46,7 @@ for (let [effect, param, type] of [
 }
 
 function send(URL, data) {
+  disableForm();
   fetch("/tree/" + URL, {
     method: "POST",
     headers: {
@@ -37,6 +56,7 @@ function send(URL, data) {
     body: JSON.stringify(data),
   })
     .then((response) => response.json())
+    .then((response) => enableForm())
     .then((response) => setMessage(response.message));
 }
 
@@ -128,7 +148,6 @@ function removeColor() {
 
 loadSavedColors();
 
-const effects = ["none", "breathe", "candle", "party"];
 function dispayHTML(name) {
   for (let effect of effects) {
     let id = `${effect}-parameters`;

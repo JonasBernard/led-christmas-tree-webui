@@ -12,9 +12,16 @@
 </head>
 
 <body class="p-0 m-0 relative">
+    <div id="overlay" style="display: none;" class="absolute top-0 w-full h-screen flex justify-center items-center bg-gray-400 opacity-30">
+            <svg class="animate-spin -ml-1 mr-3 h-14 w-14 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="50" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+    </div>
+
     <div id="message-container" class="absolute top-1 w-full"></div>
 
-    <div class="m-auto mt-2 rounded-xl flex flex-col gap-3 lg:w-[500px] w-full bg-neutral-100 p-3">
+    <div class="m-auto mt-2 rounded-xl flex flex-col gap-3 lg:w-[600px] w-full bg-neutral-100 p-3">
         <span class="text-xl flex-1 text-center">
             <span class="text-red-500 m-0 p-0">R</span><span class="text-green-500 m-0 p-0">G</span><span
                 class="text-blue-500 m-0 p-0">B</span>-Christmas-Tree-WebUI
@@ -24,10 +31,10 @@
             <button class="p-3 m-1 flex-1 bg-sky-300 rounded-xl" onclick="turnOff()">Turn off</button>
         </div>
         <div class="bg-neutral-200 rounded-xl p-2 flex flex-col gap-2">
-            <label for="bcolorPicker" class="block mb-2 text-sm font-medium text-gray-900">Color</label>
+            <label for="bcolorPicker" class="block mb-2 text-sm font-medium text-gray-900">Base color</label>
             <div class="flex gap-2">
                 <input id="colorPicker" type="color" class="w-full" value="#ffffff" />
-                <button class="px-2 rounded-full bg-neutral-400" onclick="reapplyColor()">OK</button>
+                <button class="px-2 rounded-full bg-neutral-300" onclick="reapplyColor()">OK</button>
             </div>
             <div class="flex flex-col gap-3">
                 <div id="savedColorHolder" class="flex gap-2">
@@ -41,46 +48,55 @@
 
         <div class="bg-neutral-200 rounded-xl p-2">
             <label for="brightness-float" class="block mb-2 text-sm font-medium text-gray-900">Brightness</label>
-            <input id="brightness-float" type="range" value="0.5" min="0" max="1" step="0.01"
+            <input id="brightness-float" type="range" value="0.05" min="0" max="1" step="0.01"
                 class="w-full h-2 bg-neutral-300 rounded-xl appearance-none cursor-pointer">
         </div>
 
         <div class="bg-neutral-200 rounded-xl flex-col p-2">
             <label class="block mb-2 text-sm font-medium text-gray-900">Effects</label>
-            <div class="flex">
+            <div class="flex flex-wrap">
                 <button class="p-3 m-1 bg-neutral-600 text-white rounded-xl" onclick="setEffect('none')">No effect</button>
                 <button class="p-3 m-1 bg-blue-300 rounded-xl" onclick="setEffect('breathe')">Breathe</button>
                 <button class="p-3 m-1 bg-amber-500 rounded-xl" onclick="setEffect('candle')">Candle</button>
-                <button class="p-3 m-1 bg-pink-500 rounded-xl" onclick="setEffect('party')">Party</button>
-                <button class="p-3 m-1 bg-green-400 rounded-xl" onclick="setEffect('disco')">Disco</button>
+                <button class="p-3 m-1 bg-green-400 rounded-xl" onclick="setEffect('party')">Party</button>
+                <button class="p-3 m-1 bg-lime-400 rounded-xl" onclick="setEffect('spiral')">Spiral</button>
+                <button class="p-3 m-1 bg-pink-400 rounded-xl" onclick="setEffect('huerotate')">Hue Rotate</button>
             </div>
         </div>
 
         <div id="breathe-parameters" style="display: none;" class="flex-col gap-2">
-            <div class="bg-neutral-200 rounded-xl p-2 bg-blue-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <span>Respects color.</span>
+                <span>Influences brightness.</span>
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="breathe-min-float" class="block mb-2 text-sm font-medium text-gray-900">Minimal brightness</label>
-                <input id="breathe-min-float" type="range" value="0.2" min="0" max="1" step="0.05"
+                <input id="breathe-min-float" type="range" value="0.01" min="0" max="1" step="0.01"
                     class="w-full h-2 bg-blue-500 accent-blue-800 rounded-xl appearance-none cursor-pointer">
             </div>
-            <div class="bg-neutral-200 rounded-xl p-2 bg-blue-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="breathe-max-float" class="block mb-2 text-sm font-medium text-gray-900">Maximal brightness</label>
-                <input id="breathe-max-float" type="range" value="0.6" min="0" max="1" step="0.05"
+                <input id="breathe-max-float" type="range" value="0.3" min="0" max="1" step="0.01"
                     class="w-full h-2 bg-blue-500 accent-blue-800 rounded-xl appearance-none cursor-pointer">
             </div>
-            <div class="bg-neutral-200 rounded-xl p-2 bg-blue-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="breathe-frequency-float" class="block mb-2 text-sm font-medium text-gray-900">Frequency</label>
-                <input id="breathe-frequency-float" type="range" value="2" min="0.1" max="5" step="0.05"
+                <input id="breathe-frequency-float" type="range" value="2" min="0.1" max="5" step="0.01"
                     class="w-full h-2 bg-blue-500 accent-blue-800 rounded-xl appearance-none cursor-pointer">
             </div>
         </div>
 
         <div id="candle-parameters" style="display: none;" class="flex-col gap-2">
-            <div class="bg-neutral-200 rounded-xl p-2 bg-amber-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <span>Respects base color.</span>
+                <span>Respects brightness. Works best with high brightness.</span>
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="candle-factor-float" class="block mb-2 text-sm font-medium text-gray-900">Factor</label>
                 <input id="candle-factor-float" type="range" value="0.7" min="0" max="1" step="0.01"
                     class="w-full h-2 bg-amber-500 accent-amber-800 rounded-xl appearance-none cursor-pointer">
             </div>
-            <div class="bg-neutral-200 rounded-xl p-2 bg-amber-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="candle-windiness-float" class="block mb-2 text-sm font-medium text-gray-900">Windiness</label>
                 <input id="candle-windiness-float" type="range" value="0.2" min="0" max="1" step="0.01"
                     class="w-full h-2 bg-amber-500 accent-amber-800 rounded-xl appearance-none cursor-pointer">
@@ -88,25 +104,53 @@
         </div>
 
         <div id="party-parameters" style="display: none;" class="flex-col gap-2">
-            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <span>Ignores base color.</span>
+                <span>Respects brightness.</span>
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="party-speed-float" class="block mb-2 text-sm font-medium text-gray-900">Speed</label>
                 <input id="party-speed-float" type="range" value="1" min="0" max="5" step="0.05"
-                    class="w-full h-2 bg-pink-500 accent-pink-800 rounded-xl appearance-none cursor-pointer">
+                    class="w-full h-2 bg-green-400 accent-green-800 rounded-xl appearance-none cursor-pointer">
             </div>
-            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="party-saturation-float" class="block mb-2 text-sm font-medium text-gray-900">Saturation</label>
                 <input id="party-saturation-float" type="range" value="1" min="0" max="1" step="0.01"
-                    class="w-full h-2 bg-pink-500 accent-pink-800 rounded-xl appearance-none cursor-pointer">
+                    class="w-full h-2 bg-green-400 accent-green-800 rounded-xl appearance-none cursor-pointer">
             </div>
-            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300">
+            <div class="bg-neutral-200 rounded-xl p-2">
                 <label for="party-value-float" class="block mb-2 text-sm font-medium text-gray-900">Value</label>
                 <input id="party-value-float" type="range" value="1" min="0" max="1" step="0.01"
-                    class="w-full h-2 bg-pink-500 accent-pink-800 rounded-xl appearance-none cursor-pointer">
+                    class="w-full h-2 bg-green-400 accent-green-800 rounded-xl appearance-none cursor-pointer">
             </div>
-            <div class="bg-neutral-200 rounded-xl p-2 bg-pink-300 flex items-baseline">
+            <div class="bg-neutral-200 rounded-xl p-2 flex items-baseline">
                 <input id="party-per-pixel-bool" type="checkbox" value="0"
-                class="accent-pink-500 rounded-xl cursor-pointer">
+                class="accent-green-400 rounded-xl cursor-pointer">
                 <label for="party-per-pixel-bool" class="block ml-2 text-sm font-medium text-gray-900">Use effect per LED</label>
+            </div>
+        </div>
+
+        <div id="spiral-parameters" style="display: none;" class="flex-col gap-2">
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <span>Ignores base color.</span>
+                <span>Respects brightness.</span>
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <label for="sprial-length-int" class="block mb-2 text-sm font-medium text-gray-900">Length of trail</label>
+                <input id="spiral-length-int" type="range" value="5" min="1" max="24" step="1"
+                    class="w-full h-2 bg-lime-400 accent-lime-800 rounded-xl appearance-none cursor-pointer">
+            </div>
+        </div>
+
+        <div id="huerotate-parameters" style="display: none;" class="flex-col gap-2">
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <span>Ignores base color.</span>
+                <span>Respects brightness.</span>
+            </div>
+            <div class="bg-neutral-200 rounded-xl p-2">
+                <label for="huerotate-speed-float" class="block mb-2 text-sm font-medium text-gray-900">Speed</label>
+                <input id="huerotate-speed-float" type="range" value="1" min="0" max="5" step="0.05"
+                    class="w-full h-2 bg-pink-400 accent-pink-800 rounded-xl appearance-none cursor-pointer">
             </div>
         </div>
 

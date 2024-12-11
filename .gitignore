@@ -1,8 +1,7 @@
 venv/
- __pycache__/
- *.pyc
+__pycache__/
+*/**.pyc
 src/__pycache__/
-
 src/adapters/__pycache__/
-
 src/effects/__pycache__/
+src/lib/__pycache__/

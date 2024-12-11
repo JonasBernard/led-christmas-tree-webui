@@ -1,27 +1,23 @@
-from effects.effect import Effect
 import threading
 import time
-import random
+from effects.effect import Effect
 from colorzero import Color
 
-class DiscoEffect(Effect):
+class HueRotateEffect(Effect):
     def __init__(self, adapter) -> None:
         super().__init__(adapter)
         self.adapter = adapter
         self.started = False
         self.params = {
             "speed": 1,
-            "saturation": 1,
-            "value": 1
         }
 
     def setup(self):
+        self.adapter.off()
         self.thread = threading.Thread(target=self.runner, args=[
             self.adapter,
             lambda: self.started,
             lambda: self.params["speed"],
-            lambda: self.params["saturation"],
-            lambda: self.params["value"]
         ])
         self.started = True
         self.thread.start()
@@ -30,9 +26,17 @@ class DiscoEffect(Effect):
         self.started = False
         self.thread.join()
 
-    def runner(self, adapter, should_run_on, speed, saturation, value):
-        while should_run_on():
-            hue = random.random()
-            color = Color(h=hue, s=saturation(), v=value())
-            adapter.set_color(color)
-            time.sleep(5 - speed())
+    def runner(self, adapter, should_run_on, speed):
+        steps = 250
+
+        try:
+            while True:
+                colors = [Color(h=i/steps, s=1, v=1) for i in range(steps)]
+                for c in colors:
+                    adapter.set_color(c)
+                    time.sleep(5 - speed())
+                    if not should_run_on():
+                        raise StopIteration
+        except StopIteration:
+            pass
+

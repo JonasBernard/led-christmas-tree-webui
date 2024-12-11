@@ -11,15 +11,19 @@ class BreatheEffect(Effect):
         self.adapter = adapter
         self.started = False
         self.params = {
-            "min": 0.2,
-            "max": 0.6,
+            "min": 0.01,
+            "max": 0.3,
             "frequency": 2.0
         }
 
     def setup(self):
         self.thread = threading.Thread(target=self.runner, args=[
-                                       self.adapter, lambda: self.started, lambda: self.params["min"], 
-                                       lambda: self.params["max"], lambda: self.params["frequency"]])
+            self.adapter,
+            lambda: self.started,
+            lambda: self.params["min"], 
+            lambda: self.params["max"],
+            lambda: self.params["frequency"]
+        ])
         self.started = True
         self.thread.start()
 

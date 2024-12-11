@@ -69,6 +69,8 @@ def tree_effect_param_post():
         param_value = float(param_value_raw)
     if type == "bool":
         param_value = bool(param_value_raw)
+    if type == "int":
+        param_value = int(param_value_raw)
 
     if param_value is None:
         return { "message": "Got a parameter of an invalid type." }

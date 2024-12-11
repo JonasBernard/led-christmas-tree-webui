@@ -38,3 +38,6 @@ class DummyPixel(PixelAdapter):
 
     def get_color(self):
         return self.color
+    
+    def off(self):
+        print("[Pixel " + str(self.id) + "] Turned off")

@@ -7,14 +7,17 @@ class PiAdapter(Adapter):
     def __init__(self) -> None:
         super().__init__()
         self.tree = RGBXmasTree()
+        self.overall_color = Color("#ffffff")
 
     def off(self):
-        self.effect.teardown()
+        try:
+            self.effect.teardown()
+        except:
+            pass
         self.tree.off()
 
     def on(self):
         self.tree.on()
-        self.effect.setup()
 
     def set_color(self, color):
         self.overall_color = Color(color)
@@ -46,3 +49,6 @@ class PiPixel(PixelAdapter):
 
     def get_color(self):
         return self.pixel.color
+    
+    def off(self):
+        self.pixel.off()

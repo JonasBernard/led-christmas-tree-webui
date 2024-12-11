@@ -31,16 +31,26 @@ class PartyEffect(Effect):
     def teardown(self):
         self.started = False
         self.thread.join()
+        self.adapter.off()
 
     def runner(self, adapter, should_run_on, speed, saturation, value, per_pixel):
-        while should_run_on():
-            if per_pixel():
-                for pixel in adapter.get_pixels():
+        try:
+            while True:
+                if not should_run_on():
+                    raise StopIteration
+                
+                if per_pixel():
+                    for pixel in adapter.get_pixels():
+                        hue = random.random()
+                        color = Color(h=hue, s=saturation(), v=value())
+                        pixel.set_color(color)
+
+                        if not should_run_on():
+                            raise StopIteration
+                else:
                     hue = random.random()
                     color = Color(h=hue, s=saturation(), v=value())
-                    pixel.set_color(color)
-            else:
-                hue = random.random()
-                color = Color(h=hue, s=saturation(), v=value())
-                adapter.set_color(color)
-            time.sleep(5 - speed())
+                    adapter.set_color(color)
+                time.sleep(5 - speed())
+        except StopIteration:
+            pass
