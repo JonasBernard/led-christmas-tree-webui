@@ -61,16 +61,10 @@ Then, make it executable:
 chmod +x tree.sh
 ```
 
-After that edit the `rc.local` file:
-
-```
-sudo nano /etc/rc.local
-```
-
-and add the following line BEFORE the `exit 0`:
+Now, run
 
 ```
 ./home/pi/tree.sh > /home/pi/christmas-tree-log.txt &
 ```
 
-Do not forget the `&` at the end of the line to detach the process.
+Do not forget the `&` at the end of the line if you want to detach the process.
