@@ -4,7 +4,7 @@ This is a web interface to control the
 RGB-Christmas-Tree sold by ThePiHut here:
 https://thepihut.com/products/3d-rgb-xmas-tree-for-raspberry-pi
 
-![Screenshot from 2024-12-11 02-27-30.png](Screenshot from 2024-12-11 02-27-30.png)
+![Screenshot from 2024-12-11 02-27-30.png](./Screenshot%20from%202024-12-11%2002-27-30.png)
 
 ## What do you need
 
